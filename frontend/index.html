@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkFlow — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page" data-theme="dark">
+
+    <div class="app-layout">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <span class="brand-icon">⚡</span>
+                    <span class="brand-name">WorkFlow</span>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" id="user-avatar">P</div>
+                <div class="user-info">
+                    <span class="user-name" id="nav-username">Usuario</span>
+                    <span class="user-role">Miembro</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Vistas</div>
+                <button class="nav-item active" onclick="filterByStatus('')">
+                    <span class="nav-icon">▦</span>
+                    <span class="nav-label">Todas las tareas</span>
+                    <span class="nav-badge" id="badge-all">0</span>
+                </button>
+                <button class="nav-item" onclick="filterByStatus('pending')">
+                    <span class="nav-icon">○</span>
+                    <span class="nav-label">Pendientes</span>
+                    <span class="nav-badge" id="badge-pending">0</span>
+                </button>
+                <button class="nav-item" onclick="filterByStatus('in_progress')">
+                    <span class="nav-icon">◑</span>
+                    <span class="nav-label">En progreso</span>
+                    <span class="nav-badge" id="badge-progress">0</span>
+                </button>
+                <button class="nav-item" onclick="filterByStatus('completed')">
+                    <span class="nav-icon">●</span>
+                    <span class="nav-label">Completadas</span>
+                    <span class="nav-badge" id="badge-completed">0</span>
+                </button>
+
+                <div class="nav-section-label nav-section-spacing">Prioridad</div>
+                <button class="nav-item" onclick="filterByPriority('high')">
+                    <span class="nav-icon priority-dot high"></span>
+                    <span class="nav-label">Alta</span>
+                </button>
+                <button class="nav-item" onclick="filterByPriority('medium')">
+                    <span class="nav-icon priority-dot medium"></span>
+                    <span class="nav-label">Media</span>
+                </button>
+                <button class="nav-item" onclick="filterByPriority('low')">
+                    <span class="nav-icon priority-dot low"></span>
+                    <span class="nav-label">Baja</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span class="theme-icon">☀</span>
+                    <span class="nav-label">Cambiar tema</span>
+                </button>
+                <button class="nav-item logout" onclick="logout()">
+                    <span class="nav-icon">⎋</span>
+                    <span class="nav-label">Cerrar sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN ===== -->
+        <main class="main-content">
+
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+                    <div class="topbar-title" id="topbar-title">Todas las tareas</div>
+                </div>
+                <div class="topbar-right">
+                    <div class="search-wrap">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-input" placeholder="Buscar tarea..." oninput="searchTasks()">
+                    </div>
+                    <button class="btn-new" onclick="openModal()">
+                        <span>+</span> Nueva tarea
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card" id="sc-total">
+                    <div class="stat-top">
+                        <span class="stat-label">Total</span>
+                        <span class="stat-icon">▦</span>
+                    </div>
+                    <span class="stat-number" id="stat-total">0</span>
+                </div>
+                <div class="stat-card" id="sc-pending">
+                    <div class="stat-top">
+                        <span class="stat-label">Pendientes</span>
+                        <span class="stat-icon">○</span>
+                    </div>
+                    <span class="stat-number" id="stat-pending">0</span>
+                </div>
+                <div class="stat-card" id="sc-progress">
+                    <div class="stat-top">
+                        <span class="stat-label">En progreso</span>
+                        <span class="stat-icon">◑</span>
+                    </div>
+                    <span class="stat-number" id="stat-progress">0</span>
+                </div>
+                <div class="stat-card" id="sc-completed">
+                    <div class="stat-top">
+                        <span class="stat-label">Completadas</span>
+                        <span class="stat-icon">●</span>
+                    </div>
+                    <span class="stat-number" id="stat-completed">0</span>
+                </div>
+            </div>
+
+            <!-- Tasks -->
+            <div class="tasks-header">
+                <span class="tasks-count" id="tasks-count">0 tareas</span>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="view-list" onclick="setView('list')" title="Lista">☰</button>
+                    <button class="view-btn" id="view-grid" onclick="setView('grid')" title="Grid">▦</button>
+                </div>
+            </div>
+
+            <div id="tasks-container" class="tasks-list"></div>
+
+        </main>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()"></div>
+    <div id="task-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="modal-title">Nueva tarea</h2>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="form-group">
+            <label>Título <span class="required">*</span></label>
+            <input type="text" id="task-title" placeholder="¿Qué necesitas hacer?">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea id="task-description" rows="3" placeholder="Detalles opcionales..."></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Prioridad</label>
+                <select id="task-priority" aria-label="Prioridad de la tarea">
+                    <option value="low">🟢 Baja</option>
+                    <option value="medium" selected>🟡 Media</option>
+                    <option value="high">🔴 Alta</option>
+                </select>
+            </div>
+            <div class="form-group status-hidden" id="status-group">
+                <label>Estado</label>
+                <select id="task-status" aria-label="Estado de la tarea">
+                    <option value="pending">Pendiente</option>
+                    <option value="in_progress">En progreso</option>
+                    <option value="completed">Completada</option>
+                </select>
+            </div>
+        </div>
+        <div id="modal-error" class="msg error hidden"></div>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+            <button class="btn-submit modal-submit" onclick="saveTask()">
+                <span>Guardar</span>
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/tasks.js"></script>
+</body>
+</html>

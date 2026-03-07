@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkFlow — Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page" data-theme="dark">
+
+    <div class="auth-split">
+        <!-- Panel izquierdo decorativo -->
+        <div class="auth-panel">
+            <div class="panel-content">
+                <div class="panel-logo">⚡</div>
+                <h2 class="panel-title">WorkFlow</h2>
+                <p class="panel-subtitle">El gestor de tareas para profesionales que no pierden el tiempo.</p>
+                <div class="panel-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✦</span>
+                        <span>Organiza por prioridad y estado</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✦</span>
+                        <span>Estadísticas en tiempo real</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✦</span>
+                        <span>Acceso seguro con JWT</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-grid"></div>
+        </div>
+
+        <!-- Panel derecho — formulario -->
+        <div class="auth-form-panel">
+            <div class="theme-toggle-wrap">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <span class="theme-icon">☀</span>
+                </button>
+            </div>
+
+            <div class="auth-form-inner">
+                <div class="auth-brand">
+                    <span class="brand-dot"></span>
+                    <span>WorkFlow</span>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" id="tab-login" onclick="switchTab('login')">Iniciar sesión</button>
+                    <button class="tab" id="tab-register" onclick="switchTab('register')">Crear cuenta</button>
+                </div>
+
+                <!-- Login -->
+                <div id="login-form">
+                    <h1 class="form-title">Bienvenido de nuevo</h1>
+                    <p class="form-desc">Ingresa tus credenciales para continuar</p>
+
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" id="login-username" placeholder="nombre_usuario" autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                    <div id="login-error" class="msg error hidden"></div>
+                    <button class="btn-submit" onclick="login()">
+                        <span>Entrar</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Register -->
+                <div id="register-form" class="hidden">
+                    <h1 class="form-title">Crear cuenta</h1>
+                    <p class="form-desc">Empieza a organizar tu trabajo hoy</p>
+
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" id="reg-username" placeholder="nombre_usuario">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="reg-email" placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div id="register-error" class="msg error hidden"></div>
+                    <div id="register-success" class="msg success hidden"></div>
+                    <button class="btn-submit" onclick="register()">
+                        <span>Crear cuenta</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

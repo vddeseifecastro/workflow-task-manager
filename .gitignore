@@ -1,0 +1,30 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Base de datos — NUNCA subir al repo
+*.db
+*.sqlite
+*.sqlite3
+
+# Variables de entorno — NUNCA subir al repo
+.env
+.env.*
+!.env.example
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
