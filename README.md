@@ -4,7 +4,8 @@
 ### Full Stack Task Manager
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.129-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
@@ -29,7 +30,7 @@ A modern, full-stack personal task manager built with FastAPI and Vanilla JS. Fe
 
 ### 📋 Dashboard — Dark Theme
 
-![Dashboard Dark](screenshots/dashboard_black.png)
+![Dashboard Dark](screenshots/dashboard_dark.png)
 
 ### ☀️ Dashboard — Light Theme
 
@@ -71,12 +72,12 @@ A modern, full-stack personal task manager built with FastAPI and Vanilla JS. Fe
 
 | Capa | Tecnología |
 |------|-----------|
-| Backend | FastAPI, SQLAlchemy, Pydantic, Python 3.12 |
-| Autenticación | JWT (python-jose), bcrypt (passlib) |
+| Backend | FastAPI 0.129, SQLAlchemy 2.0, Pydantic 2.12, Python 3.12 |
+| Autenticación | JWT (python-jose 3.5), bcrypt (passlib 1.7.4) |
 | Base de datos | SQLite |
 | Frontend | Vanilla JS (ES6+), HTML5, CSS3 |
 | Fuentes | Syne + DM Sans (Google Fonts) |
-| Dev Server | Uvicorn |
+| Dev Server | Uvicorn 0.41 |
 
 ---
 
@@ -97,10 +98,10 @@ venv\Scripts\activate        # Windows
 # source venv/bin/activate   # Mac / Linux
 ```
 ```bash
-pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-jose[cryptography] python-multipart email-validator python-dotenv
+pip install -r requirements.txt
 ```
 
-Crea un archivo `.env` dentro de `/backend`:
+Crea un archivo `.env` dentro de `/backend` (usa `.env.example` como plantilla):
 ```env
 SECRET_KEY=tu_clave_secreta_muy_larga_aqui
 ALGORITHM=HS256
@@ -152,7 +153,7 @@ workflow-task-manager/
 │   │       ├── users.py     ← /users/register, /users/login, /users/me
 │   │       └── tasks.py     ← CRUD completo de tareas
 │   ├── .env.example         ← Plantilla de variables de entorno
-│   └── requirements.txt
+│   └── requirements.txt     ← Dependencias Python
 │
 ├── frontend/
 │   ├── login.html           ← Página de autenticación
@@ -166,7 +167,7 @@ workflow-task-manager/
 ├── screenshots/
 │   ├── login.png
 │   ├── create_account.png
-│   ├── dashboard_black.png
+│   ├── dashboard_dark.png
 │   ├── dashboard_white.png
 │   └── new_task.png
 │
